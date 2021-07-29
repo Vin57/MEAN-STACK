@@ -19,7 +19,7 @@ services:
             - 80:3000
         volumes:
             - type: bind
-              source: ./app/dist/app
+              source: ./public
               target: /express/public
         depends_on: 
             - angular
@@ -44,6 +44,8 @@ services:
         environment:
             ME_CONFIG_MONGODB_ADMINUSERNAME: root
             ME_CONFIG_MONGODB_ADMINPASSWORD: example
+        depends_on:
+            - mongo
 
 volumes: 
     mongo_db:

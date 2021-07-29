@@ -7,6 +7,7 @@ COPY package*.json ./
 
 RUN npm install express && \
     npm install -g express-generator && \
+    npm install mongoose && \
     npm install
 
 COPY . .
