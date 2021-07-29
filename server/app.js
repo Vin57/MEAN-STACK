@@ -15,6 +15,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'))
 })
 app.listen(app.get('port'), function () {
-  console.log(`app listening on port ${app.get('port')}!`)
+  console.log(`express listening on port ${app.get('port')}!`)
 })
 module.exports = app;
