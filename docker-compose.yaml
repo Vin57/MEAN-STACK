@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+    angular:
+        build: 
+            context: ./app
+            dockerfile: Dockerfile
+        ports: 
+            - 4200:4200
+            - 49153:49153
+        volumes:
+            - type: bind
+              source: ./app/src
+              target: /usr/app/src
+    express:
+        build:
+            context: ./server
+            dockerfile: Dockerfile
+        ports: 
+            - 80:3000
+        volumes:
+            - type: bind
+              source: ./app/dist/app
+              target: /express/public
+        depends_on: 
+            - angular
