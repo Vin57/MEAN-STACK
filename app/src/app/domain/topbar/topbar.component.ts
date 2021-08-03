@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { JwtToken } from '../../models/jwt-token.model';
-import { AuthService } from '../../services/auth.service';
+import { JwtToken } from '../authentication/models/class/jwt-token.model';
+import { AuthService } from '../authentication/services/auth.service';
 
 @Component({
   selector: 'app-topbar',

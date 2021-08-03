@@ -18,7 +18,17 @@
     </span>
   </span>
   <span *ngIf="token.isAuthenticated">
-    <button mat-button (click)="logout()">Déconnexion</button>
+    <span>
+      <button mat-raised-button routerLink="/profile" routerLinkActive="active">
+        Mon compte
+      </button>
+    </span>
+    <span>
+      <button mat-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Déconnexion
+      </button>
+    </span>
   </span>
     
 </mat-toolbar>

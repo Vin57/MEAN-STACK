@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { IUser } from '../models/user.model';
 import { map, tap } from 'rxjs/operators';
-import { JwtToken } from '../models/jwt-token.model';
-import { JWTTokenFactory } from '../factories/jwt-token.factory';
+import { IUser } from 'src/app/shared/models/user.model';
+import { JwtToken } from '../models/class/jwt-token.model';
+import { JWTTokenFactory } from '../models/factories/jwt-token.factory';
 
-const API_URL = '/api';
-const JWT_LOCALE_KEY = 'jwt';
+export const API_URL = '/api';
+export const JWT_LOCALE_KEY = 'jwt';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +23,7 @@ export class AuthService {
 
   private initToken(): void {
     const token = localStorage.getItem(JWT_LOCALE_KEY);
-    this.token$.next(JWTTokenFactory.build(token.length > 0, token));
-    console.log(this.token$.value);
+    this.token$.next(JWTTokenFactory.build(token != undefined, token));
   }
 
   signup(user: IUser): Observable<IUser> {
@@ -46,5 +45,9 @@ export class AuthService {
     this.token$.next(JWTTokenFactory.build());
     // Remove jwt from localStorage
     localStorage.removeItem('jwt');
+  }
+
+  isAuthenticated(): Observable<boolean> {
+    return this.token$.pipe(map((token: JwtToken) => token.isAuthenticated));
   }
 }
