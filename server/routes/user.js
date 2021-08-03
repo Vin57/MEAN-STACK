@@ -8,16 +8,16 @@ const RSA_KEY_PUBLIC = fs.readFileSync("./rsa/key.pub");
 function isLoggedIn(req, res, next) {
   const jwtToken = req.headers.authorization;
   if (!jwtToken) {
-    res.status(401).json("unauthenticated user");
+    return res.status(401).json("unauthenticated user");
   }
   jwt.verify(jwtToken, RSA_KEY_PUBLIC, (err, decoded) => {
     if (err) {
-      res.status(401).json("invalid token");
+      return res.status(401).json("invalid token");
     }
-    const sub = decoded.sub;
-    User.findOne({ _id: sub }).exec((err, user) => {
+    const decoded_subject = decoded.sub;
+    User.findOne({ _id: decoded_subject }).exec((err, user) => {
       if (err || !user) {
-        res.status(401).json("unexpected error");
+        return res.status(401).json("unexpected error");
       }
       res.user = user;
       next();
