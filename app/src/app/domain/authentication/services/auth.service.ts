@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { API_URL } from 'src/app/shared/consts/api.consts';
 import { IUser } from 'src/app/shared/models/user.model';
 import { JwtToken } from '../models/class/jwt-token.model';
 import { JWTTokenFactory } from '../models/factories/jwt-token.factory';
 
-export const API_URL = '/api';
 export const JWT_LOCALE_KEY = 'jwt';
 
 @Injectable({

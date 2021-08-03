@@ -3,7 +3,7 @@ import { SigninComponent } from './domain/authentication/components/signin/signi
 import { SignupComponent } from './domain/authentication/components/signup/signup.component';
 import { AuthGuard } from './domain/authentication/guards/auth.guard';
 import { HomepageComponent } from './domain/homepage/homepage.component';
-import { ProfileComponent } from './domain/profile/profile.component';
+import { ProfileComponent } from './domain/user/profile.component';
 
 export const APP_ROUTES: Routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' },

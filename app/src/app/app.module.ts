@@ -6,12 +6,13 @@ import { LayoutModule } from './shared/layout/layout.module';
 import { RouterModule } from '@angular/router';
 import { APP_ROUTES } from './app.routing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomepageComponent } from './domain/homepage/homepage.component';
 import { SignupComponent } from './domain/authentication/components/signup/signup.component';
 import { SigninComponent } from './domain/authentication/components/signin/signin.component';
 import { TopbarComponent } from './domain/topbar/topbar.component';
-import { ProfileComponent } from './domain/profile/profile.component';
+import { UserInterceptor } from './domain/user/interceptors/user.interceptor';
+import { ProfileComponent } from './domain/user/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,13 @@ import { ProfileComponent } from './domain/profile/profile.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UserInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
