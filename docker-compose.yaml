@@ -21,6 +21,15 @@ services:
             - type: bind
               source: ./public
               target: /express/public
+            - type: bind
+              source: ./server/models
+              target: /express/models
+            - type: bind
+              source: ./server/routes
+              target: /express/routes
+            - type: bind
+              source: ./server/app.js
+              target: /express/app.js
         depends_on: 
             - angular
     mongo:
