@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { IUser } from '../models/user.model';
 import { map, tap } from 'rxjs/operators';
 import { JwtToken } from '../models/jwt-token.model';
+import { JWTTokenFactory } from '../factories/jwt-token.factory';
 
 const API_URL = '/api';
 const JWT_LOCALE_KEY = 'jwt';
@@ -22,10 +23,8 @@ export class AuthService {
 
   private initToken(): void {
     const token = localStorage.getItem(JWT_LOCALE_KEY);
-    this.token$.next({
-      isAuthenticated: token ? true : false,
-      token: token ?? null,
-    });
+    this.token$.next(JWTTokenFactory.build(token.length > 0, token));
+    console.log(this.token$.value);
   }
 
   signup(user: IUser): Observable<IUser> {
@@ -35,13 +34,17 @@ export class AuthService {
   signin(credentials: { email: string; password: string }): Observable<string> {
     return this.http.post<string>(`${API_URL}/auth/signin`, credentials).pipe(
       tap((token: string) => {
-        this.token$.next({
-          isAuthenticated: true,
-          token: token,
-        });
+        this.token$.next(JWTTokenFactory.build(true, token));
         localStorage.setItem(JWT_LOCALE_KEY, token);
       }),
       map((token: string) => token)
     );
+  }
+
+  logout(): void {
+    // Send empty token into BehaviorSubject
+    this.token$.next(JWTTokenFactory.build());
+    // Remove jwt from localStorage
+    localStorage.removeItem('jwt');
   }
 }

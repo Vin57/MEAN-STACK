@@ -34,7 +34,6 @@ router.post("/signin", (req, res) => {
       res.status(401).json("signin failed !");
     }
   });
-  console.log(req.body);
 });
 
 module.exports = router;

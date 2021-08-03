@@ -41,10 +41,10 @@ export class SignupComponent implements OnInit, OnDestroy {
           this.router.navigate(['/signin']);
         },
         (err) => {
-          this.error = err;
+          this.error = 'Une erreur est survenue, veuillez rééssayer';
+          console.log(err);
         }
       )
     );
-    console.log(this.form.value);
   }
 }

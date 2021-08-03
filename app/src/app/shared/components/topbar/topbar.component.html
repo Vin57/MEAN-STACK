@@ -5,15 +5,20 @@
     </button>
   </span>
   <span fxFlex="auto"></span>
-  <span>
-    <button mat-button routerLink="/signin" routerLinkActive="active">
-      Connexion
-    </button>
+  <span *ngIf="!token.isAuthenticated">
+    <span>
+      <button mat-button routerLink="/signin" routerLinkActive="active">
+        Connexion
+      </button>
+    </span>
+    <span>
+      <button mat-button routerLink="/signup" routerLinkActive="active">
+        Inscription
+      </button>
+    </span>
   </span>
-    <span>
-    <button mat-button routerLink="/signup" routerLinkActive="active">
-      Inscription
-    </button>
+  <span *ngIf="token.isAuthenticated">
+    <button mat-button (click)="logout()">Déconnexion</button>
   </span>
     
 </mat-toolbar>

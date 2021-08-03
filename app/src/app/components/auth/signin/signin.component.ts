@@ -37,9 +37,11 @@ export class SigninComponent implements OnInit, OnDestroy {
         () => {
           this.router.navigate(['/']);
         },
-        (err) => (this.error = err)
+        (err) => {
+          this.error = 'Une erreur est survenue, veuillez rééssayer';
+          console.log(err);
+        }
       )
     );
-    console.log(this.form.value);
   }
 }
