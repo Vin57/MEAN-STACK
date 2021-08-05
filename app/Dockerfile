@@ -4,8 +4,7 @@ WORKDIR /usr/app
 
 COPY package*.json ./
 
-RUN npm install -g @angular/cli && \
-    npm install --save-dev @angular-devkit/build-angular
+RUN npm install
 
 EXPOSE 4200 49153
 
